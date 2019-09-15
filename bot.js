@@ -4,9 +4,41 @@ const client = new Discord.Client();
  
  
  
+ 
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setGame(` -help `,'https://www.twitch.tv/zya2d_')
+    client.user.setStatus('ldle');
+});
+
+	
+client.on('message', message => {
+            if(!message.channel.guild) return;
+let args = message.content.split(' ').slice(1).join(' ');
+if (message.content.startsWith('-allbc')){
+ if (message.author.id !== 'ID Discord') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
+message.channel.sendMessage('✅ جار ارسال الرسالة ✅')
+client.users.forEach(m =>{
+m.sendMessage(args)
+})
+}
+});
 
 
  
+ 
+client.on('ready', () => {
+         client.on('message', message => {
+            if (message.content === 'السلام عليكم') {
+              message.channel.send('**وعليكم السلام ورحمة الله وبركاته**');
+              message.channel.sendFile("https://cdn.discordapp.com/attachments/339361862997114890/398376746333896705/3dlat.com_14032686841.gif");
+               
+ 
+            }
+});
+});
+ 
+//=======================================================================================
 
 
 
@@ -49,7 +81,6 @@ const client = new Discord.Client();
 -welcome | لتفعيل الترحيب والمغادره
 ....................................
 -Master Rainbow | لصنع رتبه رينبو
-....................................
 -link | يعطيك الرابط السيرفر الي انت في
 ....................................
 -server | لعرض معلومات السيرفر
@@ -174,7 +205,99 @@ footer: {
 });
 
 
- /      maxAge: 86400
+ //====================================================================
+//command = Rainbow Rank
+
+client.on('message',async message => {//new msg event
+if(!message.channel.guild) return;
+ if(message.content.startsWith(prefix + 'Master Rainbow')) {//to create the rainbow role
+   let role = message.guild.roles.find('name', 'Master Rainbow')
+   if(role) return message.channel.send(`! هذا الرتبة موجودة !`)//if the role already created return with this msg
+ //start of create role 
+ if(!role){
+   rainbow =  message.guild.createRole({
+  name: "Master Rainbow",//the role will create name
+  color: "#000000",//the default color
+  permissions:[]//the permissions
+//end of create role
+})
+
+}
+message.channel.send('| ✅ تم صنع رتبة بنجاح ✅ |')//if the step completed
+}})
+
+client.on('ready', () => {//new ready event
+ setInterval(function(){
+     client.guilds.forEach(g => {
+                 var role = g.roles.find('name', 'Master Rainbow');//rainbow role name
+                 if (role) {
+                     role.edit({color : "RANDOM"});
+                 };
+     });
+ }, 2500);//the rainbow time
+})
+
+//====================================================================
+
+
+
+//bot
+client.on('message',async message => {
+  if (message.content.startsWith(prefix+"bot")) {
+  message.channel.send({
+      embed: new Discord.RichEmbed()
+          .setAuthor(client.user.username,client.user.avatarURL)
+          .setThumbnail(client.user.avatarURL)
+          .setColor('RANDOM')
+          .setTitle('``INFO '+client.user.username+'``')
+          .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+          .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
+          .addField('``servers``', [client.guilds.size], true)
+          .addField('``channels``' , `[ ${client.channels.size} ]` , true)
+          .addField('``Users``' ,`[ ${client.users.size} ]` , true)
+          .addField('``My Name``' , `[ ${client.user.tag} ]` , true)
+          .addField('``My ID``' , `[ ${client.user.id} ]` , true)
+          .addField('``My Prefix``' , `[ ${prefix} ]` , true)
+          .addField('``My Language``' , `[ Java Script ]` , true)
+          .setFooter('By: <@622137185918910495> | <@608671182446919690> ')
+  })
+}
+});
+
+//.....................................
+   
+
+  
+
+
+
+
+client.on('message', message => {
+    if (message.content.startsWith("-avatar")) {
+        var mentionned = message.mentions.users.first();
+    var x5bzm;
+      if(mentionned){
+          var x5bzm = mentionned;
+      } else {
+          var x5bzm = message.author;
+         
+      }
+        const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setImage(`${x5bzm.avatarURL}`)
+      message.channel.sendEmbed(embed);
+    }
+});
+
+
+
+ client.on('message', message => {
+    if (message.content.startsWith("-link")) {
+ 
+        message.channel.createInvite({
+        thing: true,
+        maxUses: 1,
+        maxAge: 86400
     }).then(invite =>
       message.author.sendMessage(invite.url)
     )
