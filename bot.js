@@ -11,36 +11,6 @@ client.on('ready', () => {
     client.user.setStatus('ldle');
 });
 
-	
-client.on('message', message => {
-            if(!message.channel.guild) return;
-let args = message.content.split(' ').slice(1).join(' ');
-if (message.content.startsWith('-allbc')){
- if (message.author.id !== 'ID Discord') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
-message.channel.sendMessage('✅ جار ارسال الرسالة ✅')
-client.users.forEach(m =>{
-m.sendMessage(args)
-})
-}
-});
-
-
- 
- 
-client.on('ready', () => {
-         client.on('message', message => {
-            if (message.content === 'السلام عليكم') {
-              message.channel.send('**وعليكم السلام ورحمة الله وبركاته**');
-              message.channel.sendFile("https://cdn.discordapp.com/attachments/339361862997114890/398376746333896705/3dlat.com_14032686841.gif");
-               
- 
-            }
-});
-});
- 
-//=======================================================================================
-
-
 
 //=======================================================================================
 
