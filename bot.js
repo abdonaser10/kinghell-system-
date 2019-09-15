@@ -47,10 +47,6 @@ client.on('ready', () => {
          .setColor("#00FF00")
          .setThumbnail(message.author.avatarURL)
          .setDescription(`**System Kinghell  | BoT
-....................................
--welcome | لتفعيل الترحيب والمغادره
-....................................
--Master Rainbow | لصنع رتبه رينبو
 -link | يعطيك الرابط السيرفر الي انت في
 ....................................
 -server | لعرض معلومات السيرفر
@@ -317,40 +313,6 @@ client.on('message', function(msg) {
  
 
  
- client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.find('name', 'welcome');
-  if (!channel) return;
-  let memberavatar = member.user.avatarURL
-  let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setThumbnail(memberavatar)
-    .addField('**Welcome**',`**[${member}]**`)
-    .addField('**u r member number**',`**[${member.guild.memberCount}]**`)
- 
-    channel.send({embed:embed});
-}
-);
-
- 
- 
- 
- client.on('guildMemberRemove', member => {
-  const channel = member.guild.channels.find('name', 'welcome');
-  if (!channel) return;
-  let memberavatar = member.user.avatarURL
-  let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setThumbnail(memberavatar)
-    .addField('**? |Good bye| ?**',`**[${member}]**`)
-    .addField('**?? |Number of members now| ??**',`**[${member.guild.memberCount}]**`)
- 
-    channel.send({embed:embed});
-}
-);
-
-
-
-
 	
  
 
@@ -378,51 +340,6 @@ client.on('message', message => {
   
   
   
-client.on('message', message => {
-         if (message.content === "-welcome") {
-             if(!message.channel.guild) return;
-                  if(!message.channel.guild) return message.reply('**sorry, This Command For Server **');        
-     if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**You do not have premisson    **');
-                              if (!message.guild.member(client.user).hasPermission('ADMINISTRATOR')) return message.reply('**im Dont have premisson **');
-                                            message.channel.send('__**Done ?**__')            
-message.guild.createChannel('welcome', 'text');
- 
- 
-}
- 
-});
- 
- 
- 
-client.on('guildMemberAdd', msg => { 
-    var embed = new Discord.RichEmbed()
-    .setAuthor(msg.user.username, msg.user.avatarURL)
-    .setThumbnail(msg.user.avatarURL)
-    .setImage('https://cdn.discordapp.com/attachments/496581723048378388/534334241236975616/4932c9c75499ee75.png')     
-    .setTitle('Member Join!')
-    .setDescription('مرحبا بك بالسيرفر')
-    .addField('``ايدي العضو``',"" +  msg.user.id, true)
-    .addField('``تاق العضو``', msg.user.discriminator, true)
-    .addField('``تم الانشاء في``', msg.user.createdAt, true)
-    .addField(' :bust_in_silhouette:  العضو رقم',`**[ ${msg.guild.memberCount} ]**`,true)
-    .setColor('GREEN')
-    .setFooter(msg.guild.name, msg.guild.iconURL, true)
-    var channel = msg.guild.channels.find('name', 'welcome')         
-    if (!channel) return;
-    channel.send({embed : embed});
-    });
-	
-
-  
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
-:crown:اسم العضو  ${member}:crown:  
-انت العضو رقم ${member.guild.memberCount} `) 
-}).catch(console.error)
-})
-
-
 
  
  
